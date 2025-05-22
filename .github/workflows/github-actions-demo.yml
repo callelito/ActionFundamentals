@@ -1,0 +1,30 @@
+name: GitHub Actions Demo
+
+on:
+    push:
+        branches:
+            - "main"
+        paths-ignore:
+            - '.github/**'
+    workflow_dispatch: 
+    schedule:
+        - cron: '15 6 * * 0'
+
+jobs: 
+    build: 
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Output the name of the event that triggered the workflow
+              run: | 
+                echo "The event that triggered this workflow is: ${{ github.event_name }}"
+            - name: Output the name of the branch that the repository is currently referencing
+              run: | 
+                echo "Current ref: ${{ github.ref_name }}"
+            - name: Clone repo
+              uses: actions/checkout@v4
+            - name: List files in repo
+              run: |
+                tree
+            
+            
+
